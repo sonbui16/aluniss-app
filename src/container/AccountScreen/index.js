@@ -86,7 +86,7 @@ export class AccountScreen extends React.PureComponent {
       case 'none':
         break;
       case 'customer':
-        Linking.openURL(`tel:` + '0568838485');
+        Linking.openURL(`tel:` + '0902683453');
         break;
       case 'training':
         this.props.navigation.navigate('TrainingPlan');
@@ -169,14 +169,14 @@ export class AccountScreen extends React.PureComponent {
           </ListItem.Content>
           <ListItem.Chevron />
         </ListItem> */}
-        {loggedIn && (
+        {/* {loggedIn && (
           <ListItem onPress={() => this.checkDeviceID('training')}>
             <ListItem.Content>
               <Text style = {{color :"black"}} >Kế hoạch đào tạo</Text>
             </ListItem.Content>
             <ListItem.Chevron />
           </ListItem>
-        )}
+        )} */}
         {/* <ListItem onPress={() => this.checkDeviceID('customer')}>
           <ListItem.Content>
             <Text>Đánh giá ứng dụng</Text>
@@ -191,12 +191,7 @@ export class AccountScreen extends React.PureComponent {
             <ListItem.Chevron />
           </ListItem>
         )}
-        <ListItem onPress={() => this.checkDeviceID('instruct')}>
-          <ListItem.Content>
-            <Text style = {{color :"black"}} >Hướng dẫn tự học</Text>
-          </ListItem.Content>
-          <ListItem.Chevron />
-        </ListItem>
+        
 
         {/* Xoá tài khoản */}
         {loggedIn && (
@@ -208,15 +203,7 @@ export class AccountScreen extends React.PureComponent {
           </ListItem>
         )}
 
-        {Platform.OS === 'android' && (
-          <ListItem
-            onPress={() => this.props.navigation.navigate('RegisterUser')}>
-            <ListItem.Content>
-              <Text style = {{color :"black"}} >Đăng ký học </Text>
-            </ListItem.Content>
-            <ListItem.Chevron />
-          </ListItem>
-        )}
+        
         {loggedIn && (
         <ListItem
           onPress={() => this.props.navigation.navigate('ListNoti')}>
@@ -227,12 +214,12 @@ export class AccountScreen extends React.PureComponent {
         </ListItem>)}
 
         {/* Đánh giá ứng dụng */}
-        <ListItem onPress={() => this.checkDeviceID('reviewApp')}>
+        {/* <ListItem onPress={() => this.checkDeviceID('reviewApp')}>
           <ListItem.Content>
             <Text style = {{color :"black"}} >Đánh giá ứng dụng</Text>
           </ListItem.Content>
           <ListItem.Chevron />
-        </ListItem>
+        </ListItem> */}
 
         <Button
           onPress={() =>
@@ -254,7 +241,7 @@ export class AccountScreen extends React.PureComponent {
               justifyContent: 'flex-end',
              color :"black"
             }}>
-            ĐÀO TẠO THÀNH AN v{version}
+            ALuniss v{version}
           </Text>
         </View>
         <View>

@@ -16,7 +16,7 @@ import colors from 'colors';
 
 const Tab = createBottomTabNavigator();
 const homeName = 'Trang chủ';
-const documentName = 'Ôn tập';
+// const documentName = 'Ôn tập';
 const learnName = 'Vào học';
 // const searchName = 'Tìm kiếm';
 const calendarName = 'Lịch học';
@@ -34,11 +34,13 @@ function Tabs() {
           let rn = route.name;
           if (rn === homeName) {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (rn === documentName) {
-            iconName = focused
-              ? 'file-document-edit'
-              : 'file-document-edit-outline';
-          } else if (rn === learnName) {
+          } else 
+          // if (rn === documentName) {
+          //   iconName = focused
+          //     ? 'file-document-edit'
+          //     : 'file-document-edit-outline';
+          // } else 
+          if (rn === learnName) {
             iconName = focused ? 'play-circle' : 'play-circle-outline';
             // } else if (rn === searchName) {
             //   iconName = focused ? 'magnify' : 'magnify';
@@ -63,7 +65,7 @@ function Tabs() {
         tabBarInactiveTintColor: 'grey',
       })}>
       <Tab.Screen name={homeName} component={HomeScreen} />
-      <Tab.Screen name={documentName} component={DocumentScreen} />
+      {/* <Tab.Screen name={documentName} component={DocumentScreen} /> */}
       <Tab.Screen name={learnName} component={LearnScreen} />
       {/* <Tab.Screen name={searchName} component={SearchScreen} /> */}
       <Tab.Screen name={calendarName} component={CalendarScreen} />

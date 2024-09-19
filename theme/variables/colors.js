@@ -19,7 +19,7 @@ export default {
   white: '#FFFFFF',
   blue: '#0073B6',
   blue1: '#10A0FF',
-  blue2: '#ED1C22',
+  blue2: '#066AAC',
   blue3: 'white',
 
   // blue3: '#B50D0D',

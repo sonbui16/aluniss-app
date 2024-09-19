@@ -1,6 +1,6 @@
 export default {
   noThumb: require('./icon/no-thumb.png'),
-  logo: require('./logo.jpg'),
+  logo: require('./logo.png'),
   iconEmail: require('./icon/iconEmail.png'),
   iconPass: require('./icon/iconPass.png'),
   iconNext: require('./icon/iconNext.png'),

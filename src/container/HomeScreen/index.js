@@ -65,29 +65,29 @@ class HomeScreen extends React.Component {
   };
   componentDidMount() {
     const {courses, categories, searchcourse} = this.props;
-    categories(site_id, async (err, data) => {
-      if (err) {
-      } else {
-        this.setState({dataCategories: data?.data});
-        // axios
-        //   .get(
-        //     `https://api.edubit.vn/v1/courses?page=1&limit=40&site_id=${site_id}&category_id=${categoryId._id}`,
-        //     {
-        //       headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //         'Accept-Language': 'vi',
-        //       },
-        //     },
-        //   )
-        //   .then(response => {
-        //     this.setState({dataCa: response?.data.data});
-        //   })
-        //   .catch(error => {
-        //     console.error('Error calling the API:', error);
-        //   });
-      }
-    });
+    // categories(site_id, async (err, data) => {
+    //   if (err) {
+    //   } else {
+    //     this.setState({dataCategories: data?.data});
+    //     // axios
+    //     //   .get(
+    //     //     `https://api.edubit.vn/v1/courses?page=1&limit=40&site_id=${site_id}&category_id=${categoryId._id}`,
+    //     //     {
+    //     //       headers: {
+    //     //         Accept: 'application/json',
+    //     //         'Content-Type': 'application/json',
+    //     //         'Accept-Language': 'vi',
+    //     //       },
+    //     //     },
+    //     //   )
+    //     //   .then(response => {
+    //     //     this.setState({dataCa: response?.data.data});
+    //     //   })
+    //     //   .catch(error => {
+    //     //     console.error('Error calling the API:', error);
+    //     //   });
+    //   }
+    // });
     courses('courses', (err, data) => {
       if (err) {
         return;
@@ -101,7 +101,7 @@ class HomeScreen extends React.Component {
   render() {
     const {datalistCourse, dataCategories} = this.state;
     return (
-      <SafeAreaViews style={{backgroundColor: 'white'}}>
+      <SafeAreaViews style={{backgroundColor: 'white' , flex : 1 }}>
         <View
           style={{
             alignItems: 'center',
@@ -118,11 +118,22 @@ class HomeScreen extends React.Component {
           />
         </View>
 
-        <Text style={{fontSize: scale(18), fontWeight: 'bold', margin: 10}}>
-          Danh mục
-        </Text>
-        <FlatList
+        <ScrollView>
+        <CoursesPending
+              onPress={() => {
+                this.props.navigation.navigate('NextScreen', {
+                  datalistCourse: datalistCourse,
+                });
+              }}
+              data={datalistCourse}
+              navigation={this.props.navigation}
+            />
+       </ScrollView>
+        {/* <FlatList
+         showsHorizontalScrollIndicator={false}
           data={dataCategories}
+          horizontal
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index}) => {
             return (
               <Button
@@ -139,7 +150,7 @@ class HomeScreen extends React.Component {
               />
             );
           }}
-        />
+        /> */}
 
         {!this.props.loggedIn && (
           <BtnLogin navigation={this.props.navigation} />

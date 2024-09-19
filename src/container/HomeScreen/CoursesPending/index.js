@@ -124,8 +124,8 @@ class CoursesPending extends React.PureComponent {
       );
     }
   };
-  renderItem = () => {
-    const {item} = this.props;
+  renderItem = ({item, index}) => {
+    // const {item} = this.props;
     return (
       <Surface
         // key={index.toString()}
@@ -184,29 +184,37 @@ class CoursesPending extends React.PureComponent {
       </Surface>
     );
   };
-  componentDidMount() {
-    // const {courses, categories, searchcourse, item, name} = this.props;
-    // searchcourse('searchCategory', item, (err, data) => {
-    //   if (err) {
-    //     return;
-    //   } else {
-    //     this.setState({data: data?.data});
-    //   }
-    // });
-  }
+  componentDidMount() {}
   render() {
     const {onPress, item} = this.props;
-    const {data} = this.state;
+    const {data} = this.props;
 
     return (
-      <View
-        style={{
-          paddingLeft: scale(10),
-          marginTop: height * 5,
-          overflow: 'hidden',
-          paddingBottom: 10,
-        }}>
-        {this.renderItem()}
+      <View style={{}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingHorizontal: scale(15),
+            paddingVertical: scale(5),
+          }}>
+          <Text
+            style={{
+              color: '#38393D',
+              fontWeight: '700',
+              fontSize: scale(16),
+            }}>
+            Danh sách khoá học
+          </Text>
+        </View>
+        <FlatList
+          style={{marginHorizontal: scale(5)}}
+          horizontal
+          data={data}
+          showsHorizontalScrollIndicator={false}
+          renderItem={this.renderItem}
+          keyExtractor={(item, index) => index.toString()}
+        />
       </View>
     );
   }

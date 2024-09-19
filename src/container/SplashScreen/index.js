@@ -91,7 +91,7 @@ export class SplashScreen extends Component {
             fontWeight: 'bold',
             textAlign: 'center',
           }}>
-          TRUNG TÂM GIÁO DỤC NGHỀ NGHIỆP THÀNH AN
+          HỌC NHẸ NHỚ DAI TIẾNG TRUNG
         </Text>
         <ActivityIndicator size={'large'} color={'#ED1C22'} />
       </View>

@@ -7,6 +7,7 @@ import {
   Text,
   Platform,
   Linking,
+  ScrollView,
 } from 'react-native';
 import {connect} from 'react-redux';
 import images from 'imagesApp';
@@ -139,9 +140,7 @@ export class LoginScreen extends React.PureComponent {
           : '';
         try {
           await AsyncStorage.setItem('saveAccount', JSON.stringify(info));
-        } catch (err) {
-          alert(err);
-        }
+        } catch (err) {}
         this.props.saveLoggedUser(data);
         this.props.setAuthState(true);
         this.props.navigation.navigate('TabNavigation');
@@ -152,152 +151,166 @@ export class LoginScreen extends React.PureComponent {
     const {email, checkSaveAccount} = this.state;
 
     return (
-      <SafeAreaViews style={{backgroundColor: 'white' }}>
-
-        <Icon
-          onPress={() => RouterService.goBack()}
-          style={{alignSelf: 'flex-end', marginHorizontal: scale(10)}}
-          name={'close'}
-          type="material-community"
-          size={scale(20)}
-          color={colors.blue2}
-        />
-        <View
-          style={{
-            alignItems: 'center',
-          }}>
-          <Image
-            source={images.logo}
-            style={{width: '50%', height: vari.width /3}}
-            resizeMode="contain"
+      <SafeAreaViews style={{backgroundColor: 'white'}}>
+        <ScrollView>
+          <Icon
+            onPress={() => RouterService.goBack()}
+            style={{alignSelf: 'flex-end', marginHorizontal: scale(10)}}
+            name={'close'}
+            type="material-community"
+            size={scale(20)}
+            color={colors.blue2}
           />
-          <Text
+          <View
             style={{
-              fontSize: scale(14),
-              marginVertical: scale(20),
-              color: colors.blue2,
-              fontWeight: 'bold',
+              alignItems: 'center',
             }}>
-            Trung tâm giáo dục nghề nghiệp Thành An
-          </Text>
-          <Apptext
+            <Image
+              source={images.logo}
+              style={{width: '50%', height: vari.width / 3}}
+              resizeMode="contain"
+            />
+            <Text
+              style={{
+                fontSize: scale(14),
+                marginVertical: scale(20),
+                color: colors.blue2,
+                fontWeight: 'bold',
+              }}>
+              Học nhẹ nhớ dai Tiếng Trung
+            </Text>
+            <Apptext
+              style={{
+                color: colors.blue2,
+                fontSize: scale(20),
+                fontWeight: 'bold',
+              }}
+              i18nKey={'ĐĂNG NHẬP'}
+            />
+          </View>
+          <View
             style={{
-              color: colors.blue2,
-              fontSize: scale(20),
-              fontWeight: 'bold',
-            }}
-            i18nKey={'ĐĂNG NHẬP'}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: 'white',
-            margin: scale(10),
-            paddingHorizontal: scale(10),
-            borderRadius: scale(7),
-            justifyContent: 'space-evenly',
-          }}>
-          <FloatingLabelInput
-            iconImg={images.iconEmail}
-            label="Email hoặc CMND/CCCD"
-            value={email}
-            onChangeText={value => this.setState({email: value})}
-          />
-          <FloatingLabelInput
-            onPressShowPass={() => this.onPressShowPass()}
-            showIcon={true}
-            secureTextEntry={this.state.isShowPass}
-            iconImg={'lock-outline'}
-            right={
-              <TextInput.Icon
-                onPress={() => {
-                  this.onPressShowPass();
-                }}
-                icon={this.state.isShowPass ? 'eye-off' : 'eye'}
-                style={{alignItems: 'center', marginTop: scale(10)}}
-              />
-            }
-            label={'Mật khẩu'}
-            value={this.state.password}
-            onChangeText={value => {
-              this.setState({password: value});
-            }}
-          />
+              backgroundColor: 'white',
+              margin: scale(10),
+              paddingHorizontal: scale(10),
+              borderRadius: scale(7),
+              justifyContent: 'space-evenly',
+            }}>
+            <FloatingLabelInput
+              iconImg={images.iconEmail}
+              label="Email"
+              value={email}
+              onChangeText={value => this.setState({email: value})}
+            />
+            <FloatingLabelInput
+              onPressShowPass={() => this.onPressShowPass()}
+              showIcon={true}
+              secureTextEntry={this.state.isShowPass}
+              iconImg={'lock-outline'}
+              right={
+                <TextInput.Icon
+                  onPress={() => {
+                    this.onPressShowPass();
+                  }}
+                  icon={this.state.isShowPass ? 'eye-off' : 'eye'}
+                  style={{alignItems: 'center', marginTop: scale(10)}}
+                />
+              }
+              label={'Mật khẩu'}
+              value={this.state.password}
+              onChangeText={value => {
+                this.setState({password: value});
+              }}
+            />
 
-          <AuthButton
-            disabled={this.disButton()}
-            containerStyle={{backgroundColor: colors.blue2}}
-            loading={this.props.loading}
-            onPress={() =>
-              this.goLogin({
-                email: this.state.email,
-                password: this.state.password,
-                // email: 'buivane@laixelaixe.edubit.vn',
-                // password: '123456',
-                // email:"ttnga05@gmail.com",
-                // password :"nga1999"
-              })
-            }
-            text="ĐĂNG NHẬP"
-          />
-          <AuthButton
+            <AuthButton
+              disabled={this.disButton()}
+              containerStyle={{backgroundColor: colors.blue2}}
+              loading={this.props.loading}
+              onPress={() =>
+                this.goLogin({
+                  email: this.state.email,
+                  password: this.state.password,
+                  // email: 'buivane@laixelaixe.edubit.vn',
+                  // password: '123456',
+                  // email:"ttnga05@gmail.com",
+                  // password :"nga1999"
+                })
+              }
+              text="ĐĂNG NHẬP"
+            />
+            {/* <AuthButton
             // disabled={this.disButton()}
             onPress={() => this.props.navigation.navigate('InstructScreen')}
             text="HƯỚNG DẪN TỰ HỌC"
-          />
-          {/* <CheckBox
-            containerStyle={{
-              marginTop: scale(10),
-            }}
-            title={'Lưu tài khoản'}
-            textStyle={{
-              fontSize: scale(14),
-              color: 'grey',
-              fontWeight: 'normal',
-            }}
-            checkedIcon={
-              <Icon
-                name="radio-button-checked"
-                type="material"
-                color={colors.blue2}
-                size={20}
-                iconStyle={{marginRight: 10}}
-              />
-            }
-            uncheckedIcon={
-              <Icon
-                name="radio-button-unchecked"
-                type="material"
-                color="grey"
-                size={20}
-                iconStyle={{marginRight: 10}}
-              />
-            }
-            size={scale(17)}
-            onPress={() => this.onPressSaveAccount()}
-            checked={checkSaveAccount}
           /> */}
-
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical : scale(20)}}>
-            <Text
-              style={{
-                fontSize: scale(14),
-                color: 'black',
-              }}
-              onPress={() => this.props.navigation.navigate('RegisterScreen')}>
-              Đăng ký tài khoản
-            </Text>
-            <Text
-              onPress={() => this.props.navigation.navigate('ForgetPass')}
-              style={{
-                color: 'black',
-                fontSize: scale(14),
-                // color: colors.blue3,
-              }}>
-              Quên mật khẩu ?
-            </Text>
+            <View style={{flexDirection: 'row' ,alignItems :'center', justifyContent :'space-between'}}>
+              <CheckBox
+                containerStyle={{
+                  marginTop: scale(10),
+                }}
+                title={'Lưu tài khoản'}
+                textStyle={{
+                  fontSize: scale(14),
+                  color: 'grey',
+                  fontWeight: 'normal',
+                }}
+                checkedIcon={
+                  <Icon
+                    name="radio-button-checked"
+                    type="material"
+                    color={colors.blue2}
+                    size={20}
+                    iconStyle={{marginRight: 10}}
+                  />
+                }
+                uncheckedIcon={
+                  <Icon
+                    name="radio-button-unchecked"
+                    type="material"
+                    color="grey"
+                    size={20}
+                    iconStyle={{marginRight: 10}}
+                  />
+                }
+                size={scale(17)}
+                onPress={() => this.onPressSaveAccount()}
+                checked={checkSaveAccount}
+              />
+              <Text
+                onPress={() => this.props.navigation.navigate('ForgetPass')}
+                style={{
+                  color: 'black',
+                  fontSize: scale(14),
+                  // color: colors.blue3,
+                }}>
+                Quên mật khẩu ?
+              </Text>
+            </View>
+         
           </View>
-        </View>
+        </ScrollView>
+        <View
+              style={{
+                justifyContent:'center',
+                alignItems: 'center',
+                flexDirection :'row',
+              }}>
+                <Text style={{color: 'a', fontSize: scale(14)}}>
+              Bạn chưa có tài khoản?
+            </Text>
+              <Text
+                style={{
+                  fontSize: scale(16),
+                  color: colors.blue2,
+                  fontWeight: 'bold',
+                }}
+                onPress={() =>
+                  this.props.navigation.navigate('RegisterScreen')
+                }>{' '}
+                Đăng ký 
+              </Text>
+            </View>
       </SafeAreaViews>
     );
   }

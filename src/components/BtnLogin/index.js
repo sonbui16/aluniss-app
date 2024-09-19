@@ -8,18 +8,18 @@ class BtnLogin extends Component {
     return (
       <View
         style={{
-          flexDirection: 'row',
-          padding: scale(10),
-          justifyContent: 'space-evenly',
+          // flexDirection: 'row',
+          // padding: scale(10),
+          // justifyContent: 'space-evenly',
         }}>
         <Button
           onPress={() => this.props.navigation.navigate('LoginScreen')}
           title={'ĐĂNG NHẬP'}
-          titleStyle={{color: 'black', fontSize: scale(14)}}
-          buttonStyle={{borderColor: 'black', borderRadius: scale(5)}}
-          type="outline"
+          titleStyle={{color: 'white', fontSize: scale(14)}}
+          buttonStyle={{borderColor: 'black'}}
+          // type="outline"
         />
-        {Platform.OS === 'android' && (
+        {/* {Platform.OS === 'android' && (
           <Button
             onPress={() => this.props.navigation.navigate('RegisterUser')}
             title={'ĐĂNG KÝ HỌC'}
@@ -27,7 +27,7 @@ class BtnLogin extends Component {
             buttonStyle={{borderColor: 'black', borderRadius: scale(5)}}
             type="outline"
           />
-        )}
+        )} */}
       </View>
     );
   }
