@@ -1,0 +1,68 @@
+{
+  "presets": ["module:metro-react-native-babel-preset", "@babel/preset-flow"],
+  
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "src": "./src",
+          // "storage": "./src/storage",
+
+          // config
+          // "constants": "./src/constants",
+
+          // theme
+          // "fonts": "./theme/variables/fontFamily",
+          // "fSize": "./theme/variables/fontSize",
+          "colors": "./theme/variables/colors",
+          "variables": "./theme/variables",
+          "utils": "./src/utils",
+
+          // multi language
+          // "translations": "./translations",
+
+          // assets
+          "imagesApp": "./src/assets/images",
+          "assets": "./src/assets",
+
+          // font Icon
+          // "IconMoon": "./src/elements/Icon",
+          // "elements": "./src/elements",
+
+          // redux
+          "selectors": "./src/store/selectors",
+          "actions": "./src/store/actions",
+          "store": "./src/store",
+
+          // Main Screen
+          "container": "./src/container",
+
+          // Componmet
+          // "ButtonCommon": "./src/components/ButtonCommon",
+          // "SafeAreaView": "./src/components/SafeAreaView",
+          // "TextInput": "./src/components/AppTextInput",
+          // "HeaderBar": "./src/components/HeaderBar",
+          // "SearchBar": "./src/components/SearchBar",
+          // "Touchable": "./src/components/Touchable",
+          // "Image": "./src/components/ImageCommon",
+          // "Text": "./src/components/AppText",
+          "components": "./src/components"
+        }
+      }
+    ],
+    ["@babel/plugin-transform-private-methods", {"loose": true}],
+    
+  ],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
+}
