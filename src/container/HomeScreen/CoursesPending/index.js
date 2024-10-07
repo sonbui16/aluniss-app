@@ -126,6 +126,8 @@ class CoursesPending extends React.PureComponent {
   };
   renderItem = ({item, index}) => {
     // const {item} = this.props;
+    console.log("item1233" , item  );
+    
     return (
       <Surface
         // key={index.toString()}

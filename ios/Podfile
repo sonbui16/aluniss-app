@@ -16,6 +16,9 @@ end
 
 target 'Aluniss' do
   config = use_native_modules!
+  use_frameworks! :linkage => :static
+  $RNFirebaseAsStaticFramework = true
+  pod 'PDFNet', podspec: 'https://pdftron.com/downloads/ios/react-native/latest.podspec'
 
   use_react_native!(
     :path => config[:reactNativePath],
