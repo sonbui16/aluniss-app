@@ -189,44 +189,44 @@ export class Leasson extends React.PureComponent {
       </View>
     );
   };
-  studyTime = (time, format = 'seconds') => {
-    const timeStudy = format === 'seconds' ? time : time * 60;
-    const hours = Math.floor(timeStudy / 3600);
-    const minutes = Math.floor((timeStudy % 3600) / 60);
-    const secs = timeStudy % 60;
-    // Đảm bảo định dạng 2 chữ số cho phút và giây
-    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
-      2,
-      '0',
-    )}:${String(secs).padStart(2, '0')}`;
-  };
-  checkTextDone = item => {
-    let html_time = '';
-    let pass = !! item?.user_lesson_study_time?.pass_test;
-    if (item?.time_chapter && item.time_chapter > 0) {
-      const timeChapterInSeconds = item.time_chapter * 60; // Chuyển time_chapter từ phút sang giây
-      const requiredTime = timeChapterInSeconds * 0.7; // Tính 70% của time_chapter
+  // studyTime = (time, format = 'seconds') => {
+  //   const timeStudy = format === 'seconds' ? time : time * 60;
+  //   const hours = Math.floor(timeStudy / 3600);
+  //   const minutes = Math.floor((timeStudy % 3600) / 60);
+  //   const secs = timeStudy % 60;
+  //   // Đảm bảo định dạng 2 chữ số cho phút và giây
+  //   return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
+  //     2,
+  //     '0',
+  //   )}:${String(secs).padStart(2, '0')}`;
+  // };
+  // checkTextDone = item => {
+  //   let html_time = '';
+  //   let pass = !! item?.user_lesson_study_time?.pass_test;
+  //   if (item?.time_chapter && item.time_chapter > 0) {
+  //     const timeChapterInSeconds = item.time_chapter * 60; // Chuyển time_chapter từ phút sang giây
+  //     const requiredTime = timeChapterInSeconds * 0.7; // Tính 70% của time_chapter
 
-      pass = item?.user_chapter_study_time.time >= requiredTime;
-      html_time =
-        this.studyTime(item?.user_chapter_study_time.time) +
-        ' / ' +
-        this.studyTime(timeChapterInSeconds) +
-        '  ';
-    }
-    return (
-      <View style={{flexDirection: 'row'}}>
-        {html_time ? (
-          <Text style={{color: 'black', fontSize: scale(14)}}>{html_time}</Text>
-        ) : (
-          ''
-        )}
-        <Text style={{color: pass ? 'green' : 'red', fontSize: scale(14)}}>
-          ({pass ? 'Hoàn thành' : 'Chưa Hoàn thành'})
-        </Text>
-      </View>
-    );
-  };
+  //     pass = item?.user_chapter_study_time.time >= requiredTime;
+  //     html_time =
+  //       this.studyTime(item?.user_chapter_study_time.time) +
+  //       ' / ' +
+  //       this.studyTime(timeChapterInSeconds) +
+  //       '  ';
+  //   }
+  //   return (
+  //     <View style={{flexDirection: 'row'}}>
+  //       {html_time ? (
+  //         <Text style={{color: 'black', fontSize: scale(14)}}>{html_time}</Text>
+  //       ) : (
+  //         ''
+  //       )}
+  //       <Text style={{color: pass ? 'green' : 'red', fontSize: scale(14)}}>
+  //         ({pass ? 'Hoàn thành' : 'Chưa Hoàn thành'})
+  //       </Text>
+  //     </View>
+  //   );
+  // };
   renderItem2 = ({item, index}) => {
     const {data, check, onPressPauseVideo} = this.props;
     const filteredArray =
@@ -251,7 +251,7 @@ export class Leasson extends React.PureComponent {
             }}>
             {item.name}
           </Text>
-          {this.checkTextDone(item)}
+          {/* {this.checkTextDone(item)} */}
         </View>
         {filteredArray &&
           filteredArray.map((item, index) => {

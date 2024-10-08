@@ -27,9 +27,12 @@ export class ListLearnScreen extends React.PureComponent {
   }
   componentDidMount() {
     const {navigation, listLesson, auth, usersMe, dataUser} = this.props;
-    this.unsubscribe = navigation.addListener('focus', () => {
-      this.showList();
-    });
+    // this.unsubscribe = navigation.addListener('focus', () => {
+    //   this.showList();
+    // });
+
+    this.showList();
+
   }
 
   renderEmptyContainer = () => {

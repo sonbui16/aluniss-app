@@ -123,20 +123,18 @@ export class DetailLearnScreen extends Component {
           const filteredArrLessons = arrLessons.filter(
             item => item !== undefined,
           );
-       
+
           this.setState({data, arrLessons: filteredArrLessons});
         }
       });
     });
   }
- 
+
   componentWillUnmount() {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
-    
   }
- 
 
   getListLesson = lessonInfo => {
     const {listLesson, auth} = this.props;
@@ -723,7 +721,7 @@ export class DetailLearnScreen extends Component {
               defaultSource={images.noThumb}>
               <Icon
                 onPress={() => {
-                  this.props.navigation.goBack()
+                  this.props.navigation.goBack();
                 }}
                 color={colors.blue3}
                 name={'keyboard-backspace'}
@@ -817,6 +815,18 @@ export class DetailLearnScreen extends Component {
                   <Document navigation={this.props.navigation} item={item} />
                 </TabView.Item>
               </TabView>
+              {/* <Lesson
+                check={dataChoose}
+                onPress={(itemLearn, index) => {
+                  this.onPressLearn(itemLearn, index);
+                }}
+                onPressPauseVideo={() => this.onPressPauseVideo()}
+                data={data}
+                loadingCourse={this.props.loading}
+                navigation={this.props.navigation}
+                datalUser={this.state.datalUser}
+                itemCourse={item}
+              /> */}
             </>
           </View>
         )}
