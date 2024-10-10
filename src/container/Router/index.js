@@ -20,6 +20,7 @@ async function onAppBootstrap(token1) {
 
     // Lấy token
     const token = await messaging().getToken();
+    console.log("token1123", token);
     fetch('https://api.edubit.vn/v1/user-fcm-token', {
       method: 'POST',
       headers: {

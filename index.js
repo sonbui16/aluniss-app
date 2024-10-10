@@ -91,7 +91,7 @@ function onMessageReceived(message) {
     title: message?.notification?.title,
     body: message?.notification?.body,
     android: {
-      channelId: 'thanhAn',
+      channelId: 'aluniss',
       //   color: AndroidColor.RED,
       // colorized: true,
     },
@@ -102,8 +102,8 @@ function onMessageReceived(message) {
 }
 async function createNotificationChannel() {
   await notifee.createChannel({
-    id: 'thanhAn',
-    name: 'Thành An',
+    id: 'aluniss',
+    name: 'Aluniss',
     lights: false,
     vibration: true,
     importance: AndroidImportance.DEFAULT,

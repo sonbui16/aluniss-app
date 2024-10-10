@@ -47,7 +47,6 @@ export class InstructScreen extends React.PureComponent {
         <WebView
           allowsFullscreenVideo={true}
           allowsInlineMediaPlayback={true}
-          // source={{uri: dataInfo?.setting_urls?.self_study_guide}}
           source={{uri:'https://daotaothanhan.edubit.vn/p/huong-dan-tu-hoc'}}
           startInLoadingState={true}
           black

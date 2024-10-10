@@ -129,7 +129,7 @@ export class CourseDetail extends Component {
     if (Platform.OS === 'ios') {
       initConnection().then(() => {
         const sku = item?.price_sell.toString();
-        const newSku = 'thanhAn' + sku.replace(/000$/, '');
+        const newSku = 'aluniss' + sku.replace(/000$/, '');
         getProducts({skus: [newSku]}).then(res => {});
 
         this.purchaseUpdateSubscription = purchaseUpdatedListener(purchase => {
@@ -197,7 +197,7 @@ export class CourseDetail extends Component {
     const priceSell = parseFloat(item.price_sell);
     this.setState({loadingIAP: true});
     const sku = priceSell.toString();
-    const newSku = 'thanhAn' + sku.replace(/000$/, '');
+    const newSku = 'aluniss' + sku.replace(/000$/, '');
 
     try {
       await requestPurchase({

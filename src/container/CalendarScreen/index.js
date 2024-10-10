@@ -204,7 +204,6 @@ export class CalendarScreen extends React.PureComponent {
           .sort((a, b) => moment(a.title).unix() - moment(b.title).unix()); // Lọc các phần tử có data rỗng
 
         console.log('resultArray2', resultArray2);
-        // console.log('11', JSON.stringify(resultArray, null, 2));
 
         this.setState({
           // resultArray2
@@ -278,7 +277,7 @@ export class CalendarScreen extends React.PureComponent {
                     );
                   }
                 }}
-                date={dataItem && dataItem[1] && dataItem[1].title}
+                date={dataItem && dataItem[0] && dataItem[0].title}
                 showTodayButton
                 theme={this.todayBtnTheme}>
                 {weekView ? (

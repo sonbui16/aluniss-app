@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "761089957700",
-    "project_id": "thanhan-e330c",
-    "storage_bucket": "thanhan-e330c.appspot.com"
+    "project_number": "1010178508462",
+    "project_id": "aluniss-eedc2",
+    "storage_bucket": "aluniss-eedc2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:761089957700:android:305565187b449bcde10111",
+        "mobilesdk_app_id": "1:1010178508462:android:01358f6c08b53134b7cf3f",
         "android_client_info": {
           "package_name": "com.aluniss"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyApYjkAbHU1hEzovLn4bNd5R59N5j_wmbk"
+          "current_key": "AIzaSyD0YyiJJSmeOml7O7LALX6Et8feFu4ePyc"
         }
       ],
       "services": {

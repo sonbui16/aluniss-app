@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D4FFDD8AFCEFB69A7901300 /* Pods_Aluniss.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2631E197FA1F287A3D6DCD40 /* Pods_Aluniss.framework */; };
+		57BEBA032CB776760024CFA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57BEBA022CB776760024CFA3 /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		91E153156428D59B7D21A4E6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 17D26738646426BE10704357 /* PrivacyInfo.xcprivacy */; };
 		F0D313B12215C724ABED5544 /* Pods_Aluniss_AlunissTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF46E27C00E50184DDDAE15F /* Pods_Aluniss_AlunissTests.framework */; };
@@ -42,6 +43,8 @@
 		2631E197FA1F287A3D6DCD40 /* Pods_Aluniss.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aluniss.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-Aluniss.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aluniss.debug.xcconfig"; path = "Target Support Files/Pods-Aluniss/Pods-Aluniss.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Aluniss.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aluniss.release.xcconfig"; path = "Target Support Files/Pods-Aluniss/Pods-Aluniss.release.xcconfig"; sourceTree = "<group>"; };
+		57BEBA012CB774A50024CFA3 /* Aluniss.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Aluniss.entitlements; path = Aluniss/Aluniss.entitlements; sourceTree = "<group>"; };
+		57BEBA022CB776760024CFA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Aluniss-AlunissTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aluniss-AlunissTests.debug.xcconfig"; path = "Target Support Files/Pods-Aluniss-AlunissTests/Pods-Aluniss-AlunissTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Aluniss/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Aluniss-AlunissTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aluniss-AlunissTests.release.xcconfig"; path = "Target Support Files/Pods-Aluniss-AlunissTests/Pods-Aluniss-AlunissTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 		13B07FAE1A68108700A75B9A /* Aluniss */ = {
 			isa = PBXGroup;
 			children = (
+				57BEBA012CB774A50024CFA3 /* Aluniss.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -121,6 +125,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				57BEBA022CB776760024CFA3 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* Aluniss */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* AlunissTests */,
@@ -248,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				57BEBA032CB776760024CFA3 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				91E153156428D59B7D21A4E6 /* PrivacyInfo.xcprivacy in Resources */,
 			);
@@ -485,6 +491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Aluniss/Aluniss.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 882AMQHE9L;
 				ENABLE_BITCODE = NO;
@@ -518,6 +525,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Aluniss/Aluniss.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 882AMQHE9L;
 				INFOPLIST_FILE = Aluniss/Info.plist;
