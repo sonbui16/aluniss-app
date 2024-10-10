@@ -71,6 +71,7 @@ class CoursesCategory extends React.Component {
       });
   }
   renderItem = ({item, index}) => {
+    console.log("firstbh" , item )
     return (
       <CoursesPending
         item={item}
