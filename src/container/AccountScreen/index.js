@@ -97,7 +97,7 @@ export class AccountScreen extends React.PureComponent {
         Linking.openURL(
           Platform.OS === 'ios'
             ? `itms-apps://itunes.apple.com/us/app/id${6504210413}?mt=8`
-            : `market://details?id=com.thanhan`,
+            : `market://details?id=com.aluniss`,
         );
         break;
       case 'screenSetting':
@@ -214,12 +214,12 @@ export class AccountScreen extends React.PureComponent {
         </ListItem>)}
 
         {/* Đánh giá ứng dụng */}
-        {/* <ListItem onPress={() => this.checkDeviceID('reviewApp')}>
+        <ListItem onPress={() => this.checkDeviceID('reviewApp')}>
           <ListItem.Content>
             <Text style = {{color :"black"}} >Đánh giá ứng dụng</Text>
           </ListItem.Content>
           <ListItem.Chevron />
-        </ListItem> */}
+        </ListItem>
 
         <Button
           onPress={() =>

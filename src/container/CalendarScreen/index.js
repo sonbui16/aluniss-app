@@ -7,6 +7,9 @@ import BtnLogin from 'components/BtnLogin/index';
 import ListLearnScreen from 'container/LearnScreen/ListLearnScreen';
 import images from 'imagesApp';
 import isEmpty from 'lodash/isEmpty';
+import vari from 'variables/platform';
+
+import 'moment/locale/vi';
 import {
   ExpandableCalendar,
   AgendaList,
@@ -18,7 +21,14 @@ import {agendaItems} from './mock/agendaItems';
 import AgendaItem from './mock/AgendaItem';
 import {getTheme, themeColor, lightThemeColor} from './mock/theme';
 import testIDs from './mock/testIDs';
-import {Alert, Text, View, ScrollView, RefreshControl} from 'react-native';
+import {
+  Alert,
+  Text,
+  View,
+  ScrollView,
+  RefreshControl,
+  Image,
+} from 'react-native';
 import {allCalendar} from 'store/actions/app';
 import moment from 'moment';
 import {scale} from 'react-native-size-scaling';
@@ -41,8 +51,11 @@ export class CalendarScreen extends React.PureComponent {
       todayButtonTextColor: themeColor,
     };
     this.state = {
-      dataItem: [],
+      dataItem: [
+        {data: [], title: moment().startOf('month').format('YYYY-MM-DD')},
+      ],
       isRefreshing: false,
+      // dataItem: [],
     };
   }
 
@@ -51,9 +64,12 @@ export class CalendarScreen extends React.PureComponent {
     // this.focusListener = navigation.addListener('willFocus', () => {
     //   this.listCalendar();
     // });
-    this.listCalendar();
+    this.listCalendar(
+      moment().startOf('month').format('YYYY-MM-DD'),
+      moment().endOf('month').format('YYYY-MM-DD'),
+    );
   }
-  listCalendar = () => {
+  listCalendar = (startMonth, endMonth) => {
     LocaleConfig.locales['vi'] = {
       monthNames: [
         'Tháng 1',
@@ -88,7 +104,7 @@ export class CalendarScreen extends React.PureComponent {
         'Thứ 2',
         'Thứ 3',
         'Thứ 4',
-        'Thứ 5',
+        'Thứ 3',
         'Thứ 6',
         'Thứ 7',
       ],
@@ -106,21 +122,19 @@ export class CalendarScreen extends React.PureComponent {
     //   start_time: startOfMonth,
     //   end_time: endOfMonth,
     // };
-    const startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
-    const endOfMonth = moment().endOf('month').format('YYYY-MM-DD');
-    console.log('startOfMonth', startOfMonth , endOfMonth );
+    const startOfMonth = startMonth;
+    const endOfMonth = endMonth;
+    console.log('startOfMonth', startOfMonth);
+
     allCalendar(startOfMonth, endOfMonth, user.access_token, (err, data) => {
       if (err) {
       } else {
-        console.log('dataa12311111', data);
-
         const generateDailySchedules = item => {
           const {_id, schedule, schedule_id} = item;
           const {start_time, end_time} = schedule;
           const start = moment(start_time);
           const end = moment(end_time);
           const days = end.diff(start, 'days') + 1; // Số ngày bao gồm cả ngày bắt đầu và ngày kết thúc
-          // console.log('days12', days);
           const dailySchedules = [];
 
           for (let i = 0; i < days; i++) {
@@ -157,9 +171,6 @@ export class CalendarScreen extends React.PureComponent {
           return dailySchedules;
         };
         const result = data.flatMap(generateDailySchedules);
-
-        console.log('result123', result);
-
         const newArray1 = result.map(item => ({
           title: moment(item?.schedule?.start_time).format('YYYY-MM-DD'),
           data: [
@@ -169,7 +180,6 @@ export class CalendarScreen extends React.PureComponent {
             },
           ],
         }));
-        console.log('newArray1', newArray1);
         const combinedData = newArray1.reduce((acc, current) => {
           // Kiểm tra xem tiêu đề đã tồn tại trong đối tượng tạm thời chưa
           if (acc[current.title]) {
@@ -203,10 +213,7 @@ export class CalendarScreen extends React.PureComponent {
           .filter(item => item.data.length > 0)
           .sort((a, b) => moment(a.title).unix() - moment(b.title).unix()); // Lọc các phần tử có data rỗng
 
-        console.log('resultArray2', resultArray2);
-
         this.setState({
-          // resultArray2
           dataItem: resultArray2,
           isRefreshing: false,
         });
@@ -231,7 +238,6 @@ export class CalendarScreen extends React.PureComponent {
     return marked;
   };
   renderItem = ({item}) => {
-    console.log('item111', item);
     const {dataItem} = this.state;
     return (
       <AgendaItem
@@ -251,57 +257,76 @@ export class CalendarScreen extends React.PureComponent {
     console.log('dataItem', dataItem);
     return (
       <SafeAreaView style={{backgroundColor: 'white'}}>
-        <Toolbar title="Lịch học"></Toolbar>
+        <Toolbar
+          iconLeft={images.iconBack}
+          leftPress={() => this.props.navigation.goBack()}
+          title="Lịch học"></Toolbar>
         <ScrollView
           contentContainerStyle={{
             flex: 1,
           }}
-          refreshControl={
-            <RefreshControl
-              refreshing={isRefreshing}
-              onRefresh={this.onRefresh}
-            />
-          }>
+          // refreshControl={
+          //   <RefreshControl
+          //     refreshing={isRefreshing}
+          //     onRefresh={this.onRefresh}
+          //   />
+          // }
+        >
           {loggedIn ? (
-            dataItem.length > 0 ? (
-              <CalendarProvider
-                onDateChanged={day => {
-                  const isValueExist = dataItem.some(
-                    item => item.title === `${day}`,
-                  );
-                  if (isValueExist) {
-                  } else {
-                    Alert.alert(
-                      'Thông báo',
-                      'Không có sự kiện nào được lập kế hoạch.',
-                    );
-                  }
-                }}
-                date={dataItem && dataItem[0] && dataItem[0].title}
-                showTodayButton
-                theme={this.todayBtnTheme}>
-                {weekView ? (
-                  <WeekCalendar
-                    testID={testIDs.weekCalendar.CONTAINER}
-                    firstDay={1}
-                    markedDates={this.getMarkedDates()}
-                  />
-                ) : (
-                  <ExpandableCalendar
-                    testID={testIDs.expandableCalendar.CONTAINER}
-                    theme={this.theme}
-                    firstDay={1}
-                    markedDates={this.getMarkedDates()}
-                    leftArrowImageSource={images.logout}
-                    rightArrowImageSource={images.logout}
-                  />
-                )}
+            // dataItem.length > 0 ? (
+            <CalendarProvider
+              onMonthChange={month => {
+                console.log('month', month);
+                const endOfMonth = moment(month.dateString)
+                  .endOf('month')
+                  .format('YYYY-MM-DD');
+                this.listCalendar(month.dateString, endOfMonth);
+              }}
+              onDateChanged={day => {
+                const isValueExist = dataItem.some(
+                  item => item.title === `${day}`,
+                );
+                if (isValueExist) {
+                } else {
+                  // Alert.alert(
+                  //   'Thông báo',
+                  //   'Không có sự kiện nào được lập kế hoạch.',
+                  // );
+                }
+              }}
+              date={dataItem && dataItem[0] && dataItem[0].title}
+              showTodayButton
+              theme={this.todayBtnTheme}>
+              {weekView ? (
+                <WeekCalendar
+                  testID={testIDs.weekCalendar.CONTAINER}
+                  // firstDay={5}
+                  markedDates={this.getMarkedDates()}
+                />
+              ) : (
+                <ExpandableCalendar
+                  hideKnob
+                  closeOnDayPress={false}
+                  initialPosition="open"
+                  testID={testIDs.expandableCalendar.CONTAINER}
+                  theme={this.theme}
+                  // firstDay={2}
+                  markedDates={this.getMarkedDates()}
+                  // leftArrowImageSource={images.logout}
+                  // rightArrowImageSource={images.logout}
+                />
+              )}
+              {dataItem && dataItem.length > 0 ? (
                 <AgendaList
+                  // dayFormat={'yyyy-MM-d'}
                   dayFormatter={arg => {
                     moment.locale('vi');
                     return moment(arg).format('dddd, DD/MM/YYYY');
                   }}
-                  markToday={true}
+                  // useMoment={true}
+                  // markToday={true}
+                  // inverted
+                  // scrollToNextEvent
                   sections={dataItem}
                   renderItem={this.renderItem}
                   sectionStyle={{
@@ -310,20 +335,48 @@ export class CalendarScreen extends React.PureComponent {
                     textTransform: 'capitalize',
                   }}
                 />
-              </CalendarProvider>
-            ) : (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{fontSize: scale(14) , color :'black'}}>
-                  Bạn chưa có sự kiện nào cả
-                </Text>
-              </View>
-            )
+              ) : (
+                <View
+                  style={{
+                    padding: scale(10),
+                    borderRadius: scale(5),
+                    backgroundColor: 'white',
+                    marginTop: scale(10),
+                    borderWidth: 1,
+                    margin : scale(5),
+                    borderColor: '#ddd',
+                  }}>
+                  <Text style={{fontSize: scale(16), color: 'black'}}>
+                    Không có sự kiện
+                  </Text>
+                </View>
+              )}
+            </CalendarProvider>
           ) : (
+            // ) : (
+            //   <View
+            //     style={{
+            //       flex: 1,
+            //       justifyContent: 'center',
+            //       alignItems: 'center',
+            //     }}>
+            //     <Image
+            //       resizeMode="contain"
+            //       source={images.schedule}
+            //       style={{
+            //         height: vari.width / 4,
+            //         width: vari.width / 4,
+            //       }}></Image>
+            //     <Text
+            //       style={{
+            //         fontSize: scale(16),
+            //         color: 'black',
+            //         marginTop: scale(10),
+            //       }}>
+            //       Bạn chưa có sự kiện nào cả
+            //     </Text>
+            //   </View>
+            // )
             <CancelLogin />
           )}
 

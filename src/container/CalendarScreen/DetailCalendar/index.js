@@ -142,17 +142,13 @@ export class DetailCalendar extends Component {
   deleteLeave = item => {
     const {deleteLeaveCalendar, tokenCalendar} = this.props;
     const {data} = this.state;
-    deleteLeaveCalendar(
-      item?._id,
-      tokenCalendar,
-      (err, data) => {
-        if (err) {
-          return;
-        } else {
-          this.listlistSchedule();
-        }
-      },
-    );
+    deleteLeaveCalendar(item?._id, tokenCalendar, (err, data) => {
+      if (err) {
+        return;
+      } else {
+        this.listlistSchedule();
+      }
+    });
   };
   toggleDialog = () => {
     this.setState({visible: !this.state.visible});
@@ -331,7 +327,7 @@ export class DetailCalendar extends Component {
           {/* <Text>Ngày sự kiện :{startTime.format('DD/MM/YYYY')} </Text> */}
 
           <Card.Divider />
-          <Text style={{fontSize: scale(14), color: 'black' ,}}>
+          <Text style={{fontSize: scale(14), color: 'black'}}>
             Ngày sự kiện :
             <Text style={{fontSize: scale(12), color: 'black'}}>
               {' '}
@@ -503,99 +499,78 @@ export class DetailCalendar extends Component {
           leftPress={() => this.props.navigation.goBack()}
         />
         <ScrollView>
-        {!this.props.loading ? (
-          <View>
-            <View style={{padding: scale(10)}}>
-              <View
-                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text
+          {!this.props.loading ? (
+            <View>
+              <View style={{padding: scale(10)}}>
+                <View
                   style={{
-                    fontSize: scale(18),
-                    fontWeight: 'bold',
-                    color: 'black',
-                    width : '80%'
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    // backgroundColor: 'yellow',
                   }}>
-                  {data?.title}
-                </Text>
-                {this.showStatus('title') === 'Đã kết thúc' ? null : ( // 'ended'
-                  <View
+                  <Text
                     style={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
+                      fontSize: scale(18),
+                      fontWeight: 'bold',
+                      color: 'black',
+                      width: this.showStatus('title') === 'Đã kết thúc' ?'100%' : '50%',
                     }}>
-                    {data?.schedule?.type === 'optional' ? (
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                        }}>
-                        <Button
-                          onPress={() => this.toggleAccept()}
-                          title="CHẤP NHẬN"
-                          titleStyle={{fontSize: scale(14)}}
-                        />
-                        <Button
-                          buttonStyle={{marginLeft: scale(5)}}
-                          onPress={() => this.toggleRefuse()}
-                          title="TỪ CHỐI THAM DỰ"
-                          color="error"
-                          titleStyle={{fontSize: scale(14)}}
-                        />
-                      </View>
-                    ) : (
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                        }}>
-                        <Button
-                          onPress={() => this.toggleDialog()}
-                          title="XIN NGHỈ"
-                          color="error"
-                          titleStyle={{fontSize: scale(14)}}
-                        />
-
-                        {this.showStatus('title') === 'Đang diễn ra' && (
+                    {data?.title}
+                  </Text>
+                  {this.showStatus('title') === 'Đã kết thúc' ? null : ( // 'ended'
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        // backgroundColor: 'green',
+                      }}>
+                      {data?.schedule?.type === 'optional' ? (
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                          }}>
                           <Button
-                            buttonStyle={{marginLeft: scale(5)}}
-                            disabled={this.checkinDay() && true}
-                            onPress={() => this.toggleCheckin()}
-                            title={
-                              this.checkinDay() ? 'ĐÃ ĐIỂM DANH' : 'ĐIỂM DANH'
-                            }
+                            onPress={() => this.toggleAccept()}
+                            title="CHẤP NHẬN"
                             titleStyle={{fontSize: scale(14)}}
                           />
-                        )}
-                      </View>
-                    )}
-                  </View>
-                )}
-              </View>
+                          <Button
+                            buttonStyle={{marginLeft: scale(5)}}
+                            onPress={() => this.toggleRefuse()}
+                            title="TỪ CHỐI THAM DỰ"
+                            color="error"
+                            titleStyle={{fontSize: scale(14)}}
+                          />
+                        </View>
+                      ) : (
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                          }}>
+                          <Button
+                            onPress={() => this.toggleDialog()}
+                            title="XIN NGHỈ"
+                            color="error"
+                            titleStyle={{fontSize: scale(14)}}
+                          />
 
-              <Text
-                style={{
-                  fontSize: scale(14),
-                  marginTop: scale(10),
-                  fontWeight: 'bold',
-                  color: 'black',
-                }}>
-                Ngày : <Text style={styles.text}>{item?.day}</Text>
-              </Text>
-              <Text
-                style={{
-                  fontSize: scale(14),
-                  fontWeight: 'bold',
-                  color: 'black',
-                  marginTop: scale(10),
-                }}>
-                Trạng thái:{' '}
-                <Text
-                  style={{
-                    color: this.showStatus('color'),
-                    fontWeight: 'normal',
-                  }}>
-                  {this.showStatus('title')}
-                </Text>
-              </Text>
-              {data?.repeat_frequency?.start && (
+                          {this.showStatus('title') === 'Đang diễn ra' && (
+                            <Button
+                              buttonStyle={{marginLeft: scale(5)}}
+                              disabled={this.checkinDay() && true}
+                              onPress={() => this.toggleCheckin()}
+                              title={
+                                this.checkinDay() ? 'ĐÃ ĐIỂM DANH' : 'ĐIỂM DANH'
+                              }
+                              titleStyle={{fontSize: scale(14)}}
+                            />
+                          )}
+                        </View>
+                      )}
+                    </View>
+                  )}
+                </View>
+
                 <Text
                   style={{
                     fontSize: scale(14),
@@ -603,92 +578,111 @@ export class DetailCalendar extends Component {
                     fontWeight: 'bold',
                     color: 'black',
                   }}>
-                  Thời gian : <Text style={styles.text}>{this.timeDay()}</Text>
+                  Ngày : <Text style={styles.text}>{item?.day}</Text>
                 </Text>
-              )}
-              <View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text
+                  style={{
+                    fontSize: scale(14),
+                    fontWeight: 'bold',
+                    color: 'black',
+                    marginTop: scale(10),
+                  }}>
+                  Trạng thái:{' '}
+                  <Text
+                    style={{
+                      color: this.showStatus('color'),
+                      fontWeight: 'normal',
+                    }}>
+                    {this.showStatus('title')}
+                  </Text>
+                </Text>
+                {data?.repeat_frequency?.start && (
                   <Text
                     style={{
                       fontSize: scale(14),
-                      marginVertical: scale(10),
+                      marginTop: scale(10),
                       fontWeight: 'bold',
                       color: 'black',
                     }}>
-                    Nội dung: {''}
+                    Thời gian :{' '}
+                    <Text style={styles.text}>{this.timeDay()}</Text>
                   </Text>
-                  <View>
+                )}
+                <View>
+                  <View style={{}}>
+                    <Text
+                      style={{
+                        fontSize: scale(14),
+                        marginTop: scale(10),
+                        fontWeight: 'bold',
+                        color: 'black',
+                      }}>
+                      Nội dung: {''}
+                    </Text>
+
                     <HTMLView
-                      source={source}
-                      // defaultTextProps={{
-                      //   numberOfLines: this.state.showMore ? 1 : 0,
-                      //   onTextLayout: e => {
-                      //     if (e.nativeEvent.lines.length > NUM_OF_LINES) {
-                      //       this.setState({showMore: true});
-                      //     }
-                      //   },
-                      // }}
-                      // baseStyle={{
-                      //   width: Dimensions.get('window').width / 1.3,
-                      //   color: 'red',
-                      //   fontSize: scale(12),
-                      // }}
+                    source ={source}
+                      // source={{html: source}}
+                      allowedStyles={[]}
+                      baseStyle={{
+                        fontSize: scale(14),
+                        color: 'black',
+                      }}
                     />
                   </View>
+                  <View style={{alignItems: 'flex-end'}}>
+                    {this.state.showMore && (
+                      <Button
+                        onPress={() => this.btnShowMore()}
+                        containerStyle={{
+                          width: 100,
+                        }}
+                        size="sm"
+                        title="Xem thêm"
+                        type="clear"
+                        titleStyle={{fontSize: scale(12)}}
+                      />
+                    )}
+                  </View>
                 </View>
-                <View style={{alignItems: 'flex-end'}}>
-                  {this.state.showMore && (
-                    <Button
-                      onPress={() => this.btnShowMore()}
-                      containerStyle={{
-                        width: 100,
-                      }}
-                      size="sm"
-                      title="Xem thêm"
-                      type="clear"
-                      titleStyle={{fontSize: scale(12)}}
-                    />
-                  )}
-                </View>
-              </View>
 
-              <Text style={{fontSize: scale(16), fontWeight: 'bold'}}>
-                Điểm danh - xin nghỉ{' '}
-              </Text>
-              <View style={{height: vari.height / 1.7}}>
-                <FlatList
-                  data={dataEvents?.data || []}
-                  extraData={this.state}
-                  renderItem={this.renderItem}
-                  ListEmptyComponent={() => {
-                    return (
-                      <View
-                        style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
-                        <Image
-                          source={images.noresult}
+                <Text style={{fontSize: scale(16), fontWeight: 'bold',color :'black'}}>
+                  Điểm danh - xin nghỉ{' '}
+                </Text>
+                <View style={{height: vari.height / 1.7}}>
+                  <FlatList
+                    data={dataEvents?.data || []}
+                    extraData={this.state}
+                    renderItem={this.renderItem}
+                    ListEmptyComponent={() => {
+                      return (
+                        <View
                           style={{
-                            width: vari.width / 3,
-                            height: vari.width / 3,
-                          }}
-                        />
-                        <Text style={{fontSize: scale(12)}}>
-                          Bạn chưa có danh sách nào cả !
-                        </Text>
-                      </View>
-                    );
-                  }}></FlatList>
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}>
+                          <Image
+                            source={images.noresult}
+                            style={{
+                              width: vari.width / 3,
+                              height: vari.width / 3,
+                            }}
+                          />
+                          <Text style={{fontSize: scale(12)}}>
+                            Bạn chưa có danh sách nào cả !
+                          </Text>
+                        </View>
+                      );
+                    }}></FlatList>
+                </View>
               </View>
             </View>
-          </View>
-        ) : (
-          <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <ActivityIndicator color={colors.blue3} />
-          </View>
-        )}
+          ) : (
+            <View
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <ActivityIndicator color={colors.blue3} />
+            </View>
+          )}
         </ScrollView>
         <Dialog
           overlayStyle={{width: '90%', borderRadius: 10}}
@@ -734,9 +728,7 @@ export class DetailCalendar extends Component {
           onBackdropPress={() => this.btnShowMore()}>
           <Dialog.Title title="Nội dung" />
           <ScrollView style={{}}>
-            <HTMLView
-              source={source}
-            />
+            <HTMLView source={source} />
           </ScrollView>
         </Dialog>
       </SafeAreaView>
