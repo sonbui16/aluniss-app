@@ -297,9 +297,10 @@ export class CalendarScreen extends React.PureComponent {
                   />
                 )}
                 <AgendaList
-                  // style={{backgroundColor: 'red'}}
-                  // contentContainerStyle={{backgroundColor: 'red'}}
-                  // useMoment={true}
+                  dayFormatter={arg => {
+                    moment.locale('vi');
+                    return moment(arg).format('dddd, DD/MM/YYYY');
+                  }}
                   markToday={true}
                   sections={dataItem}
                   renderItem={this.renderItem}

@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Platform,
+  PermissionsAndroid
 } from 'react-native';
 import {Provider} from 'react-redux';
 import Router from './src/container/Router';

@@ -86,7 +86,7 @@ class CoursesCategory extends React.Component {
     const {item} = this.props;
     return (
       <SafeAreaViews>
-        <Text style={{fontSize: scale(14), padding: scale(10)}}>
+        <Text style={{fontSize: scale(16), padding: scale(10), fontWeight :'bold'}}>
           {item.name}
         </Text>
         <FlatList
