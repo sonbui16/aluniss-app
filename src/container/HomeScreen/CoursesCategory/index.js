@@ -64,14 +64,20 @@ class CoursesCategory extends React.Component {
         },
       )
       .then(response => {
-        this.setState({dataCa: response?.data.data});
+        let arrData = response?.data.data.filter(element => {
+          if (element?.status !== 2) return element;
+        });
+
+        // this.setState({dataCa: response?.data.data});
+        this.setState({dataCa: arrData});
+        // console.log('dataCa', arrData);
       })
       .catch(error => {
         console.error('Error calling the API:', error);
       });
   }
   renderItem = ({item, index}) => {
-    console.log("firstbh" , item )
+    console.log('firstbh', item);
     return (
       <CoursesPending
         item={item}
@@ -86,7 +92,8 @@ class CoursesCategory extends React.Component {
     const {item} = this.props;
     return (
       <SafeAreaViews>
-        <Text style={{fontSize: scale(16), padding: scale(10), fontWeight :'bold'}}>
+        <Text
+          style={{fontSize: scale(16), padding: scale(10), fontWeight: 'bold'}}>
           {item.name}
         </Text>
         <FlatList
