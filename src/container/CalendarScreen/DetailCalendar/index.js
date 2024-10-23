@@ -35,6 +35,7 @@ import HTMLView from 'react-native-render-html';
   state => ({
     tokenCalendar: state.auth.user?.access_token,
     loading: isRequestPending(state, 'selectCalendar'),
+    loadingCheckin: isRequestPending(state, 'loadingCheckin'),
   }),
   {
     selectCalendar,
@@ -62,15 +63,20 @@ export class DetailCalendar extends Component {
   }
 
   componentDidMount() {
+    this.getData();
+  }
+  getData = () => {
     Promise.all([this.listlistSchedule(), this.selectCalendar()])
       .then(result => {})
       .catch(err => {});
-  }
+  };
   listlistSchedule = () => {
     const {item} = this.props.route.params;
     const {tokenCalendar, listScheduleEvents, selectCalendar} = this.props;
+    // y/m/d 
     listScheduleEvents(
       item?.day,
+      // "2024/10/23",
       item?._id,
       item?.user_schedule_id,
       tokenCalendar,
@@ -78,6 +84,8 @@ export class DetailCalendar extends Component {
         if (err) {
           return;
         } else {
+          console.log("data6666", data);
+          
           this.setState({dataEvents: data});
         }
       },
@@ -86,9 +94,13 @@ export class DetailCalendar extends Component {
   selectCalendar = () => {
     const {selectCalendar, tokenCalendar, eventsCalendar} = this.props;
     const {item} = this.props.route.params;
+    console.log("tokenCalendar" , tokenCalendar);
+    
     selectCalendar(item._id, tokenCalendar, (err, data) => {
       if (err) return;
       if (data) {
+        console.log("data123478" , data );
+        
         this.setState({
           data: data,
         });
@@ -159,8 +171,11 @@ export class DetailCalendar extends Component {
   toggleCheckin = () => {
     const {calendarCheckin, tokenCalendar} = this.props;
     const {data} = this.state;
+    console.log("data123000" , data);
+    
     const info = {
-      user_schedule_id: data?._id,
+      // user_schedule_id: data?._id,
+      user_schedule_id: data?.user_schedule?._id,
     };
     calendarCheckin(info, tokenCalendar, (err, data) => {
       if (err) {
@@ -294,7 +309,7 @@ export class DetailCalendar extends Component {
 
             <Card.Title>{this.checkTitle(item.type)}</Card.Title>
             {/* check lại sự kiện này đã kết thúc hay chưa   */}
-            {checkStatus.isDelete ? (
+            {/* {checkStatus.isDelete ? (
               <Icon
                 onPress={() => {
                   Alert.alert(
@@ -322,7 +337,8 @@ export class DetailCalendar extends Component {
               />
             ) : (
               <View />
-            )}
+            )} */}
+               <View />
           </View>
           {/* <Text>Ngày sự kiện :{startTime.format('DD/MM/YYYY')} </Text> */}
 
@@ -348,7 +364,7 @@ export class DetailCalendar extends Component {
                 fontSize: scale(14),
                 color: checkStatus.color,
               }}>
-              {checkStatus.text}
+              {' '}{checkStatus.text}
             </Text>
           </Text>
         </Card>
@@ -367,12 +383,18 @@ export class DetailCalendar extends Component {
     };
     leaveCalendar(info, tokenCalendar, (err, data) => {
       if (err) {
+        console.log("data1234" ,data)
+
         Alert.alert('Thông báo', err?.message?.message);
         return;
       } else {
-        this.toggleDialog();
-        this.selectCalendar();
-        this.listlistSchedule();
+        console.log("data123" ,data)
+        this.setState({visible: false});
+        Alert.alert("Thông báo", data?.message);
+        this.getData();
+        // this.toggleDialog();
+        // this.selectCalendar();
+        // this.listlistSchedule();
       }
     });
   };
@@ -502,26 +524,40 @@ export class DetailCalendar extends Component {
           {!this.props.loading ? (
             <View>
               <View style={{padding: scale(10)}}>
+                <Text
+                  style={{
+                    fontSize: scale(18),
+                    fontWeight: 'bold',
+                    color: 'black',
+                    // width:
+                    //   this.showStatus('title') === 'Đã kết thúc'
+                    //     ? '100%'
+                    //     : '50%',
+                  }}>
+                  {data?.title}
+                </Text>
                 <View
                   style={{
                     flexDirection: 'row',
-                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginTop: scale(10),
+
                     // backgroundColor: 'yellow',
                   }}>
                   <Text
                     style={{
-                      fontSize: scale(18),
+                      fontSize: scale(14),
+
                       fontWeight: 'bold',
                       color: 'black',
-                      width: this.showStatus('title') === 'Đã kết thúc' ?'100%' : '50%',
                     }}>
-                    {data?.title}
+                    Trạng thái :
                   </Text>
                   {this.showStatus('title') === 'Đã kết thúc' ? null : ( // 'ended'
                     <View
                       style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        // justifyContent: 'center',
+                        marginLeft: scale(10),
                         // backgroundColor: 'green',
                       }}>
                       {data?.schedule?.type === 'optional' ? (
@@ -556,6 +592,7 @@ export class DetailCalendar extends Component {
 
                           {this.showStatus('title') === 'Đang diễn ra' && (
                             <Button
+                              loading={this.props.loadingCheckin}
                               buttonStyle={{marginLeft: scale(5)}}
                               disabled={this.checkinDay() && true}
                               onPress={() => this.toggleCheckin()}
@@ -608,7 +645,7 @@ export class DetailCalendar extends Component {
                     <Text style={styles.text}>{this.timeDay()}</Text>
                   </Text>
                 )}
-                <View>
+                <View style={{}}>
                   <View style={{}}>
                     <Text
                       style={{
@@ -621,7 +658,8 @@ export class DetailCalendar extends Component {
                     </Text>
 
                     <HTMLView
-                    source ={source}
+                     contentWidth={Dimensions.get('window').width}
+                      source={source}
                       // source={{html: source}}
                       allowedStyles={[]}
                       baseStyle={{
@@ -646,7 +684,13 @@ export class DetailCalendar extends Component {
                   </View>
                 </View>
 
-                <Text style={{fontSize: scale(16), fontWeight: 'bold',color :'black'}}>
+                <Text
+                  style={{
+                    fontSize: scale(16),
+                    fontWeight: 'bold',
+                    color: 'black',
+                    marginTop: scale(10),
+                  }}>
                   Điểm danh - xin nghỉ{' '}
                 </Text>
                 <View style={{height: vari.height / 1.7}}>
@@ -688,7 +732,7 @@ export class DetailCalendar extends Component {
           overlayStyle={{width: '90%', borderRadius: 10}}
           isVisible={visible}
           onBackdropPress={() => this.toggleDialog()}>
-          <Dialog.Title title="Đơn xin nghỉ" />
+          <Dialog.Title title="Đơn xin nghỉ" titleStyle={{color: 'black'}} />
           <Text
             style={{
               fontSize: scale(14),
@@ -704,6 +748,7 @@ export class DetailCalendar extends Component {
             inputStyle={{
               height: vari.width / 2,
               fontSize: scale(14),
+              textAlignVertical: 'top',
             }}
             inputContainerStyle={{
               borderBottomWidth: 0,

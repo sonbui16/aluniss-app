@@ -142,9 +142,11 @@ class CoursesPending extends React.PureComponent {
             width: vari.width / 2.5,
             backgroundColor: 'white',
             marginLeft: scale(10),
+            borderWidth : 0.5,
+            borderColor: 'grey',
           }}>
           <Image
-            resizeMode="contain"
+            resizeMode='stretch'
             defaultSource={images.noThumb}
             source={
               item?.thumbnail_url ? {uri: item?.thumbnail_url} : images.noThumb

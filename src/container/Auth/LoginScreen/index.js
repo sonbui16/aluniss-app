@@ -202,6 +202,7 @@ export class LoginScreen extends React.PureComponent {
               value={email}
               onChangeText={value => this.setState({email: value})}
             />
+            <View style={{height: scale(15)}} />
             <FloatingLabelInput
               onPressShowPass={() => this.onPressShowPass()}
               showIcon={true}
