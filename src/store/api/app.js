@@ -529,8 +529,8 @@ export default {
       },
     ),
 
-  updateProfile: (idUser, params = {}, token) =>
-    API_HUECHIAKI.put(`students/${idUser}`, params, {
+  updateProfile: (params = {}, token) =>
+    API_HUECHIAKI.post(`users/update-profile`, params, {
       headers: {Authorization: `Bearer ${token}`},
     }),
 

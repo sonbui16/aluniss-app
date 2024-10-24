@@ -60,14 +60,24 @@ export class UpdateScreen extends React.PureComponent {
   updateUser = () => {
     const {updateProfile, user} = this.props;
     const {dataUser, birthday, phone, fullname} = this.state;
+  
     const info = {
       birthday: birthday,
       phone: phone,
       fullname: fullname,
       sex: '1',
     };
-    updateProfile(dataUser?._id, info, user.access_token, (err, data) => {
+    updateProfile(info, user.access_token, (err, data) => {
       if (err) {
+        const errResponse = err?.message?.errors;
+        if (errResponse) {
+          const constraints = errResponse[0]?.constraints;
+          const firstConstraint = Object.values(constraints)[0];
+          Alert.alert('Thông báo', firstConstraint);
+          console.log(firstConstraint)
+        } else {
+          Alert.alert('Thông báo', err?.message?.message);
+        }
         return;
       } else {
         Alert.alert('Cập nhật thông tin thành công');
@@ -88,11 +98,16 @@ export class UpdateScreen extends React.PureComponent {
           leftPress={() => this.props.navigation.goBack()}
           title="Cập nhật thông tin"></Toolbar>
         <View style={{flex: 1, padding: scale(20)}}>
-          <Text style={{fontSize: scale(14), paddingVertical: scale(10), color :'black'}}>
+          <Text
+            style={{
+              fontSize: scale(14),
+              paddingVertical: scale(10),
+              color: 'black',
+            }}>
             Họ và tên <Text style={{color: 'red'}}>*</Text>
           </Text>
           <TextInput
-            textColor='black'
+            textColor="black"
             dense
             style={{backgroundColor: 'white'}}
             activeOutlineColor="red"
@@ -103,23 +118,38 @@ export class UpdateScreen extends React.PureComponent {
               this.setState({fullname: text});
             }}
           />
-          <Text style={{fontSize: scale(14), paddingVertical: scale(10) , color :'black' }}>
+          <Text
+            style={{
+              fontSize: scale(14),
+              paddingVertical: scale(10),
+              color: 'black',
+            }}>
             Email <Text style={{color: 'red'}}>*</Text>
           </Text>
           <TextInput dense disabled mode="outlined" value={email} />
           {passport && (
             <View>
-              <Text style={{fontSize: scale(14), paddingVertical: scale(10) , color :'black' }}>
+              <Text
+                style={{
+                  fontSize: scale(14),
+                  paddingVertical: scale(10),
+                  color: 'black',
+                }}>
                 CMND/CCCD
               </Text>
               <TextInput dense disabled mode="outlined" value={passport} />
             </View>
           )}
-          <Text style={{fontSize: scale(14), paddingVertical: scale(10) , color :'black' }}>
+          <Text
+            style={{
+              fontSize: scale(14),
+              paddingVertical: scale(10),
+              color: 'black',
+            }}>
             Số điện thoại
           </Text>
           <TextInput
-            textColor='black'
+            textColor="black"
             dense
             style={{backgroundColor: 'white'}}
             activeOutlineColor="red"
@@ -148,7 +178,8 @@ export class UpdateScreen extends React.PureComponent {
               uncheckedIcon="circle-o"
             />
           </View> */}
-          <Text style={{fontSize: scale(14), marginTop: scale(10) , color :'black' }}>
+          <Text
+            style={{fontSize: scale(14), marginTop: scale(10), color: 'black'}}>
             Ngày sinh
           </Text>
           <TouchableOpacity
@@ -162,7 +193,9 @@ export class UpdateScreen extends React.PureComponent {
               borderColor: 'grey',
               marginVertical: scale(10),
             }}>
-            <Text style={{fontSize: scale(14) ,color :'black'}}>{birthday}</Text>
+            <Text style={{fontSize: scale(14), color: 'black'}}>
+              {birthday}
+            </Text>
           </TouchableOpacity>
           <Button
             title="Cập nhật"
