@@ -430,7 +430,7 @@ import {getIdYoutube} from 'utils/index';
 import {completeLesson, lessonsID} from 'store/actions/app';
 import vari from 'variables/platform';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import {Slider, Icon} from '@rneui/themed';
+import { Icon} from '@rneui/themed';
 import {scale} from 'react-native-size-scaling';
 import ShowAlert from 'src/components/ShowAlert';
 import {decode} from 'html-entities';
@@ -1095,7 +1095,7 @@ export class YoutubeDetail extends React.PureComponent {
                             }
                           : {}
                       }>
-                      <Slider
+                      <YoutubeDetail
                         orientation={'horizontal'}
                         style={
                           this.props.checkFullYoutube

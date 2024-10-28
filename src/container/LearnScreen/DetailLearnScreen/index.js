@@ -169,10 +169,9 @@ export class DetailLearnScreen extends Component {
                 isFullScreen: false,
               });
             }
-            // this.onFullScreen()
           } else {
           }
-          this.onPressLearn(arrLessons[indexLession + 1], indexLession + 1);
+          // this.onPressLearn(arrLessons[indexLession + 1], indexLession + 1);
         });
       }
     });
@@ -346,6 +345,8 @@ export class DetailLearnScreen extends Component {
   };
   youtubeDetail = () => {
     const {lessonInfo, videoWidth, videoHeight} = this.state;
+    console.log('lessonInfo', lessonInfo);
+    
     return (
       <YoutubeDetail
         onFullScreenYoutube={this.onFullScreenYoutube}
@@ -401,6 +402,8 @@ export class DetailLearnScreen extends Component {
                   // Bài học video mơi
                   // this.videoDetail();
                   if (data.lesson_info.type === 'youtube') {
+                  
+                    
                     this.setState({
                       type: data.lesson_info.type,
                       lessonInfo: data,
@@ -469,6 +472,7 @@ export class DetailLearnScreen extends Component {
       }
       if (dataCourse?.type_open_lesson === 1) {
         lessonsID('get', auth.access_token, item._id, (err, data) => {
+
           if (err) {
             return;
           } else {
