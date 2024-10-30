@@ -84,8 +84,6 @@ export class DetailCalendar extends Component {
         if (err) {
           return;
         } else {
-          console.log("data6666", data);
-          
           this.setState({dataEvents: data});
         }
       },
@@ -94,12 +92,10 @@ export class DetailCalendar extends Component {
   selectCalendar = () => {
     const {selectCalendar, tokenCalendar, eventsCalendar} = this.props;
     const {item} = this.props.route.params;
-    console.log("tokenCalendar" , tokenCalendar);
     
     selectCalendar(item._id, tokenCalendar, (err, data) => {
       if (err) return;
       if (data) {
-        console.log("data123478" , data );
         
         this.setState({
           data: data,
@@ -171,7 +167,6 @@ export class DetailCalendar extends Component {
   toggleCheckin = () => {
     const {calendarCheckin, tokenCalendar} = this.props;
     const {data} = this.state;
-    console.log("data123000" , data);
     
     const info = {
       // user_schedule_id: data?._id,
@@ -383,12 +378,10 @@ export class DetailCalendar extends Component {
     };
     leaveCalendar(info, tokenCalendar, (err, data) => {
       if (err) {
-        console.log("data1234" ,data)
 
         Alert.alert('Thông báo', err?.message?.message);
         return;
       } else {
-        console.log("data123" ,data)
         this.setState({visible: false});
         Alert.alert("Thông báo", data?.message);
         this.getData();

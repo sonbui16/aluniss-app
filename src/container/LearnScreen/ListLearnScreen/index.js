@@ -87,7 +87,6 @@ export class ListLearnScreen extends React.PureComponent {
   };
   render() {
     const {data} = this.state;
-    console.log('buihongson', data);
     return (
       <View style={{flex: 1}}>
 

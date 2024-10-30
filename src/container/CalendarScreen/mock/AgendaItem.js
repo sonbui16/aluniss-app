@@ -18,9 +18,6 @@ class AgendaItem extends Component {
     const dataCalenda = listData.flatMap(item => item?.data);
     const dataSchedule = dataCalenda
       .filter(itemSchedule => itemSchedule?.title === item?.title)
-
-      console.log("dataSchedule", item , dataSchedule );
-      
     this.props.navigation.navigate('DetailCalendar', {item , dataSchedule } );
   };
 

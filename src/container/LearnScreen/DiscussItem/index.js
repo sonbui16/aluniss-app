@@ -103,10 +103,8 @@ export class DiscussItem extends React.PureComponent {
   };
 
   studyTime = (time, titleTime) => {
-    console.log('time2', time);
     // if (titleTime === 'minutes') {
     //   const seconds = time * 60;
-    //   console.log("sonbh",seconds,moment.utc(seconds * 1000).format('HH:mm:ss'))
     //   return time;
     // } else {
     //   let duration = moment.duration(time, 'seconds');
@@ -125,7 +123,6 @@ export class DiscussItem extends React.PureComponent {
 
     var numberComplete =
       (data?.total_complete_lesson / data?.total_lesson) * 100 || 0;
-    console.log('data1', data);
     return (
       <View style={{paddingHorizontal: 10}}>
         <TouchableOpacity

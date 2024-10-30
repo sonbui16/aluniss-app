@@ -26,7 +26,7 @@ export class SplashScreen extends Component {
   componentDidMount() {
     this.timeout = setTimeout(() => {
       this.loadApp();
-    }, 600);
+    }, 4000);
   }
   resetLogin = async () => {
     const {user, refresh} = this.props;
@@ -76,7 +76,7 @@ export class SplashScreen extends Component {
         <Image
           source={images.logo}
           style={{
-            height: vari.width / 3,
+            height: vari.width / 3.5,
             width: '70%',
             // tintColor: 'white',
             // backgroundColor :'yellow'
@@ -87,12 +87,47 @@ export class SplashScreen extends Component {
           style={{
             fontSize: scale(20),
             color: '#ED1C22',
-            marginVertical: scale(20),
+            marginVertical: scale(10),
             fontWeight: 'bold',
             textAlign: 'center',
           }}>
           HỌC NHẸ NHỚ DAI TIẾNG TRUNG
         </Text>
+        <Text
+          style={{
+            fontSize: scale(14),
+            color: '#ED1C22',
+            textAlign: 'center',
+          }}>
+          Chào mừng học viên đến với Aluniss
+        </Text>
+        <View style={{flexDirection: 'row' , marginVertical : 10}}>
+          <Text
+            style={{
+              fontSize: scale(16),
+              color: '#ED1C22',
+              fontWeight: 'bold',
+            }}>
+            Lưu ý (*):{' '}
+          </Text>
+          <View>
+            <Text
+              style={{
+                fontSize: scale(14),
+                color: '#ED1C22',
+              }}>
+              Học viên đến mục Vào học để xem video
+            </Text>
+            <Text
+              style={{
+                fontSize: scale(14),
+                color: '#ED1C22',
+              }}>
+              Khóa màn hình dọc để video hiển thị dễ xem
+            </Text>
+          </View>
+        </View>
+
         <ActivityIndicator size={'large'} color={'#ED1C22'} />
       </View>
     );

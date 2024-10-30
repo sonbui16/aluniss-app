@@ -64,7 +64,6 @@ export class TestScreen extends Component {
   }
   render() {
     const {data, datalUser} = this.props.route.params;
-    console.log('data123', data);
     const {domainSite} = this.props;
     const domain = domainSite?.domain
       ? domainSite?.domain

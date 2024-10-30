@@ -345,7 +345,6 @@ export class DetailLearnScreen extends Component {
   };
   youtubeDetail = () => {
     const {lessonInfo, videoWidth, videoHeight} = this.state;
-    console.log('lessonInfo', lessonInfo);
     
     return (
       <YoutubeDetail

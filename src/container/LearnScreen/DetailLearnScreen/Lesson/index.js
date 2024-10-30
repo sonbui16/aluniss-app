@@ -409,7 +409,6 @@ export class Leasson extends React.PureComponent {
     const {loadingCourse, data} = this.props;
     // const newData = data.map(({child, ...rest}) => ({...rest, data: child}));
     const result = data && data?.filter(item => item.status_lesson !== 1);
-    console.log('1result', result);
     return (
       <View style={{flex: 1}}>
         {/* <Button title="Scroll to Section 3" onPress={this.scrollToLocation} /> */}

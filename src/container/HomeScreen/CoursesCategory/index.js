@@ -70,14 +70,12 @@ class CoursesCategory extends React.Component {
 
         // this.setState({dataCa: response?.data.data});
         this.setState({dataCa: arrData});
-        // console.log('dataCa', arrData);
       })
       .catch(error => {
         console.error('Error calling the API:', error);
       });
   }
   renderItem = ({item, index}) => {
-    console.log('firstbh', item);
     return (
       <CoursesPending
         item={item}
