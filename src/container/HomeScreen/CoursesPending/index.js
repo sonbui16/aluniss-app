@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import {
   FlatList,
   TouchableOpacity,
@@ -129,6 +128,7 @@ class CoursesPending extends React.PureComponent {
   render() {
     const {onPress, item} = this.props;
     const {data} = this.props;
+    
     return (
       <View style={{}}>
         <TouchableOpacity

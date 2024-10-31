@@ -119,15 +119,11 @@ class HomeScreen extends React.Component {
         </View>
 
         <ScrollView>
-
-        {dataCategories.map((item, index) => {
-              return (
-                <CoursesCategory
-                  item={item}
-                  navigation={this.props.navigation}
-                />
-              );
-            })}
+          {dataCategories.map((item, index) => {
+            return (
+              <CoursesCategory item={item} navigation={this.props.navigation} />
+            );
+          })}
 
           {/* <CoursesPending
             onPress={() => {
