@@ -57,7 +57,6 @@ export const createRequestSaga = ({
   /*uploadProgress, downloadProgress, intervalProgress=50, */ blob,
 }) =>
   function* (action) {
-    console.log('Action', action);
 
     let args = action.args || [];
 
@@ -94,7 +93,6 @@ export const createRequestSaga = ({
         // blob support progress
         // if (blob) {
         // if(uploadProgress){
-        //   console.log(uploadProgress, intervalProgress)
         //   chainRequest = chainRequest.uploadProgress({ interval : intervalProgress }, function* (uploaded, total){
         //       for(let actionCreator of uploadProgress){
         //         yield put(actionCreator({uploaded, total}, action))

@@ -33,7 +33,6 @@ const ListNoti = props => {
   //       if (err) {
   //         return;
   //       } else {
-  //         console.log('data123', data);
   //         setData(data?.data);
   //       }
   //     }),

@@ -31,11 +31,9 @@ const MyStatusBar = ({backgroundColor, ...props}) => (
 notifee.onForegroundEvent(({type, detail}) => {
   switch (type) {
     case EventType.DISMISSED:
-      console.log('User dismissed notification', detail.notification);
       // notifee.decrementBadgeCount();
       break;
     case EventType.PRESS:
-      console.log('Người dùng nhấn thông báo1', detail.notification);
       notifee.decrementBadgeCount();
       RouterService.navigate('CalendarScreen');
       break;
@@ -58,7 +56,6 @@ export class App extends Component {
       Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
     if (enabled) {
-      console.log('Authorization status:', authStatus);
     }
   };
   requestAndroidPermissions = async () => {

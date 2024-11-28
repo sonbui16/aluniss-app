@@ -14,14 +14,11 @@ import notifee, {
 import {firebase} from '@react-native-firebase/messaging';
 //
 // notifee.onForegroundEvent(({type, detail}) => {
-//   console.log('typeobj', type, detail);
 //   switch (type) {
 //     case EventType.DISMISSED:
-//       console.log('User dismissed notification', detail.notification);
 //       // notifee.decrementBadgeCount();
 //       break;
 //     case EventType.PRESS:
-//       console.log('Người dùng nhấn thông báo', detail.notification);
 //       notifee.decrementBadgeCount();
 //       RouterService.navigate('ForgetPass')
 //       break;
@@ -29,7 +26,6 @@ import {firebase} from '@react-native-firebase/messaging';
 // });
 notifee.onBackgroundEvent(async ({type, detail}) => {
   if (type === EventType.PRESS) {
-    console.log('User pressed the notification.', detail.pressAction.id);
   }
 });
 
@@ -39,12 +35,10 @@ notifee.onBackgroundEvent(async ({type, detail}) => {
 //     await messaging()
 //       .registerDeviceForRemoteMessages()
 //       .then(() => {
-//         console.log('Device registered for remote messages');
 //       })
 //       .catch(error => {
 //         console.error('Error registering device for remote messages:', error);
 //       });
-
 //     // Lấy token
 //     const token = await messaging().getToken();
 //     fetch('https://api.edubit.vn/v1/user-fcm-token', {

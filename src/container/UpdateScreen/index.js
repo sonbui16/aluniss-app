@@ -45,7 +45,6 @@ export class UpdateScreen extends React.PureComponent {
       if (err) {
         return;
       } else {
-        console.log('data123', data);
         this.setState({
           dataUser: data,
           email: data?.email,
@@ -74,7 +73,6 @@ export class UpdateScreen extends React.PureComponent {
           const constraints = errResponse[0]?.constraints;
           const firstConstraint = Object.values(constraints)[0];
           Alert.alert('Thông báo', firstConstraint);
-          console.log(firstConstraint)
         } else {
           Alert.alert('Thông báo', err?.message?.message);
         }

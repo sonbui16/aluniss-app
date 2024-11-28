@@ -102,7 +102,6 @@ const CalendarScreen = ({navigation}) => {
         }
         if (data) {
           const result = data.flatMap(generateDailySchedules);
-          console.log('generateDailySchedules', result);
 
           const newArray1 = result.map(item => ({
             title: moment(item?.schedule?.start_time).format('YYYY-MM-DD'),
@@ -180,7 +179,6 @@ const CalendarScreen = ({navigation}) => {
         },
       });
     }
-    console.log('dailySchedules', dailySchedules);
 
     return dailySchedules;
   };

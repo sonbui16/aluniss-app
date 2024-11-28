@@ -84,7 +84,6 @@ export class VideoTrial extends Component {
               //     this.setState({visible: 'data'});
               //   },
               //   fullscreenchange: data =>
-              //     console.log('fullscreenchange: ', data),
               //   ended: data => console.log('ended: ', data),
               //   controlschange: data => console.log('controlschange: ', data),
               // }}

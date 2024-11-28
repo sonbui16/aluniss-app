@@ -84,6 +84,7 @@ export class SplashScreen extends Component {
           resizeMode="contain"
         />
         <Text
+          maxFontSizeMultiplier={1}
           style={{
             fontSize: scale(20),
             color: '#ED1C22',
@@ -94,6 +95,7 @@ export class SplashScreen extends Component {
           HỌC NHẸ NHỚ DAI TIẾNG TRUNG
         </Text>
         <Text
+          maxFontSizeMultiplier={1}
           style={{
             fontSize: scale(14),
             color: '#ED1C22',
@@ -101,29 +103,33 @@ export class SplashScreen extends Component {
           }}>
           Chào mừng học viên đến với Aluniss
         </Text>
-        <View style={{flexDirection: 'row' , marginVertical : 10}}>
+        <View style={{ marginVertical: 10}}>
           <Text
+            maxFontSizeMultiplier={1}
             style={{
               fontSize: scale(16),
               color: '#ED1C22',
               fontWeight: 'bold',
+              textAlign: 'center',
             }}>
-            Lưu ý (*):{' '}
+            Lưu ý:
           </Text>
           <View>
             <Text
+              maxFontSizeMultiplier={1}
               style={{
                 fontSize: scale(14),
                 color: '#ED1C22',
               }}>
-              Học viên đến mục Vào học để xem video
+              Học viên đến mục vào học để xem video
             </Text>
             <Text
+              maxFontSizeMultiplier={1}
               style={{
                 fontSize: scale(14),
                 color: '#ED1C22',
               }}>
-              Khóa màn hình dọc để video hiển thị dễ xem
+              Khóa màn hình dọc để xem video dễ hơn
             </Text>
           </View>
         </View>

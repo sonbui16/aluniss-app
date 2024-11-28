@@ -12,15 +12,12 @@ async function onAppBootstrap(token1) {
     await messaging()
       .registerDeviceForRemoteMessages()
       .then(() => {
-        console.log('Device registered for remote messages');
       })
       .catch(error => {
-        console.error('Error registering device for remote messages:', error);
       });
 
     // Lấy token
     const token = await messaging().getToken();
-    console.log("token1123", token);
     fetch('https://api.edubit.vn/v1/user-fcm-token', {
       method: 'POST',
       headers: {
@@ -41,7 +38,6 @@ async function onAppBootstrap(token1) {
         return response.json(); // Chuyển đổi phản hồi thành JSON
       })
       .then(data => {
-        console.log('Response data2:', data); // Hiển thị nội dung response
       })
       .catch(error => {
         console.error('Response data31:', error); // Hiển thị lỗi nếu có
